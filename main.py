@@ -5,25 +5,13 @@ WARNING
 INFO
 DEBUG
 """
-import logging
+import logging.config
 
-# pylint: disable=R0903
-logging.basicConfig(level=logging.INFO)
+logging.config.fileConfig('logging.ini')
+logger = logging.getLogger('simpleExample')
 
-
-class NoPassFilter(logging.Filter):
-    """
-    NoPassFilter
-    """
-    def filter(self, record):
-        """
-        filter
-        """
-        log_message = record.getMessage()
-        return 'password' not in log_message
-
-
-LOGGER = logging.getLogger(__name__)
-LOGGER.addFilter(NoPassFilter())
-LOGGER.info('from main')
-LOGGER.info('from main password = "test"')
+logger.debug('debug message')
+logger.info('info message')
+logger.warning('warn message')
+logger.error('error message')
+logger.critical('critical message')
