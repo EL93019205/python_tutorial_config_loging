@@ -6,13 +6,13 @@ INFO
 DEBUG
 """
 import logging
+import logtest
 
-FORMATTER = '%(levelname)s:%(message)s'
-# FORMATTER = '%(asctime)s:%(message)s'
-logging.basicConfig(level=logging.DEBUG, format=FORMATTER)
+logging.basicConfig(level=logging.INFO)
 
-logging.critical('critical')
-logging.error('error')
-logging.warning('warning')
 logging.info('info')
-logging.debug('debug')
+
+LOGGER = logging.getLogger(__name__)
+LOGGER.info('from main')
+
+logtest.do_something()
