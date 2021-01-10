@@ -10,8 +10,6 @@ import logtest
 
 logging.basicConfig(level=logging.INFO)
 
-logging.info('info')
-
 LOGGER = logging.getLogger(__name__)
 LOGGER.info('from main')
 
