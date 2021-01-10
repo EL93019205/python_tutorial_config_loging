@@ -7,8 +7,9 @@ DEBUG
 """
 import logging
 
-# logging.basicConfig(filename='test.log', level=logging.DEBUG)
-logging.basicConfig(level=logging.DEBUG)
+FORMATTER = '%(levelname)s:%(message)s'
+# FORMATTER = '%(asctime)s:%(message)s'
+logging.basicConfig(level=logging.DEBUG, format=FORMATTER)
 
 logging.critical('critical')
 logging.error('error')
