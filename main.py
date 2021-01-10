@@ -1,30 +1,17 @@
 """
-web_server:
-    host: 127.0.0.1
-    port: 80
-
-db_server:
-    host: 127.0.0.1
-    port: 3306
+CRITICAL
+ERROR
+WARNING
+INFO
+DEBUG
 """
-import yaml
+import logging
 
-with open('config.yml', 'w') as yaml_file:
-    yaml.dump({
-        'web_server': {
-            'host': '127.0.0.1',
-            'port': 80
-        },
-        'db_server': {
-            'host': '127.0.0.1',
-            'port': 3306
-        },
-    }, yaml_file, default_flow_style=False)
+# logging.basicConfig(filename='test.log', level=logging.DEBUG)
+logging.basicConfig(level=logging.DEBUG)
 
-with open('config.yml', 'r') as yaml_file:
-    data = yaml.load(yaml_file, Loader=yaml.FullLoader)
-    print(data, type(data))
-    print(data['web_server']['host'])
-    print(data['web_server']['port'])
-    print(data['db_server']['host'])
-    print(data['db_server']['port'])
+logging.critical('critical')
+logging.error('error')
+logging.warning('warning')
+logging.info('info')
+logging.debug('debug')
