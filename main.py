@@ -1,8 +1,11 @@
 """
 main
 """
-from email import message
+from email.mime import multipart
+from email.mime import text
 import smtplib
+
+
 import account
 
 
@@ -13,11 +16,19 @@ TO_EMAIL = account.to_email()
 USERNAME = account.username()
 PASSWORD = account.password()
 
-MSG = message.EmailMessage()
-MSG.set_content('Test email')
+MSG = multipart.MIMEMultipart()
 MSG['Subject'] = 'Test email sub'
 MSG['From'] = FROM_EMAIL
 MSG['To'] = TO_EMAIL
+MSG.attach(text.MIMEText('Test email', 'plain'))
+
+with open('main.py', 'r') as f:
+    attachment = text.MIMEText(f.read(), 'plain')
+    attachment.add_header(
+        'Content-Disposition', 'attachment',
+        filename='lesson.txt'
+    )
+    MSG.attach(attachment)
 
 SERVER = smtplib.SMTP(SMTP_HOST, SMTP_PORT)
 SERVER.ehlo()
