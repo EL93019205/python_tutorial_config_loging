@@ -6,11 +6,24 @@ INFO
 DEBUG
 """
 import logging
-import logtest
 
+# pylint: disable=R0903
 logging.basicConfig(level=logging.INFO)
 
-LOGGER = logging.getLogger(__name__)
-LOGGER.info('from main')
 
-logtest.do_something()
+class NoPassFilter(logging.Filter):
+    """
+    NoPassFilter
+    """
+    def filter(self, record):
+        """
+        filter
+        """
+        log_message = record.getMessage()
+        return 'password' not in log_message
+
+
+LOGGER = logging.getLogger(__name__)
+LOGGER.addFilter(NoPassFilter())
+LOGGER.info('from main')
+LOGGER.info('from main password = "test"')
