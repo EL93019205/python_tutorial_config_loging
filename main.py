@@ -7,11 +7,12 @@ DEBUG
 """
 import logging.config
 
-logging.config.fileConfig('logging.ini')
-logger = logging.getLogger('simpleExample')
+LOGGER = logging.getLogger(__name__)
 
-logger.debug('debug message')
-logger.info('info message')
-logger.warning('warn message')
-logger.error('error message')
-logger.critical('critical message')
+LOGGER.error('api call is failed')
+
+LOGGER.error({
+    'action': 'create',
+    'status': 'fail',
+    'message': 'Api call is failed'
+})
